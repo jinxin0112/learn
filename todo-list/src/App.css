@@ -1,9 +1,51 @@
-.App {
-  width:50%;
-  margin:0 auto;
-  background: #eee;
-  padding:20px 0 80px 0;
-  margin-top:20px;
+@media screen and (min-width: 1200px) {
+  .App {
+    width:50%;
+    margin:0 auto;
+    background: #eee;
+    padding:20px 0 80px 0;
+    margin-top:20px;
+  }
+  .list-container li .left{
+    width:90%;
+  }
+  .list-container li .right{
+    width:10%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .App {
+    width:100%;
+    margin:0 auto;
+    background: #eee;
+    padding:20px 0 80px 0;
+  }
+  .list-container li .left{
+    width:90%;
+  }
+  .list-container li .right{
+    width:10%;
+  }
+  .list-container li .left{
+    width:80%;
+  }
+  .list-container li .right{
+    width:20%;
+  }
+}
+@media screen and (min-width:600px) and (max-width:1200px){
+  .App {
+    width:80%;
+    margin:0 auto;
+    background: #eee;
+    padding:20px 0 80px 0;
+  }
+  .list-container li .left{
+    width:85%;
+  }
+  .list-container li .right{
+    width:15%;
+  }
 }
 h3{
   text-align: center;
@@ -24,8 +66,21 @@ h3{
   background: #fefefe;
   box-sizing:border-box;
 }
+.list-container li .left{
+  float: left;
+  height:40px;
+  overflow: hidden;
+}
+.list-container li .right{
+  float: right;
+  text-align: center;
+}
+.list-container li input[type = 'checkbox'] {
+  margin-top:5px;
+}
 .list-container li label{
-  display: inline-block;
+  overflow: hidden;
+  height:40px;
   cursor : pointer;
 }
 .list-container label.complete{
@@ -33,7 +88,7 @@ h3{
   text-decoration:line-through;
 }
 .list-container li input[type = 'button'] {
-  float : right;
-  margin : 7px 10px 0 0 ;
   cursor: pointer;
+  width:80%;
+  min-width: 45px;
 }
