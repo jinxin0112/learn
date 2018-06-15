@@ -6,13 +6,143 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        
+        body{
+            text-align: center;
+        }
+        #content{
+            text-align: center;
+            width:640px;
+            margin:auto;
+            position:relative;
+        }
+        #canvas{
+            position:absolute;
+        }
+        input{
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
     <div id="content">
-        <canvas id="canvas"></canvas>>
-        <video src="" width="640" height="380"></video>
+        <canvas id="canvas"></canvas>
+        <video src="./src/show.mp4" width="640" height="380" id="video" controls="true"></video>
     </div>
+    <input type="text" id="text">
+    <input type="color" id="color" value="#ffffff">
+    <input type="range" id="range" max="40" min="20">
+    <input type="button" value="发送" id="add">
+    <script>
+        let data = [{
+            value:'金鑫太帅没办法',time:1,speed:3,color:'#e4393c',fontSize:40
+        },{
+            value:'努力学习前端技术',time:2
+        }];
+        let $ = document.querySelector.bind(document);
+        let canvas = $('#canvas');
+        let video = $('#video');
+
+        class Brrage {
+            constructor (obj,ctx){
+                this.value = obj.value;
+                this.time = obj.time;
+                this.ctx = ctx;
+                this.obj = obj;
+            }
+            init (){
+                this.speed = this.obj.speed || this.ctx.speed;
+                this.fontSize = this.obj.fontSize || this.ctx.fontSize;
+                this.color = this.obj.color || this.ctx.color;
+
+                let span = document.createElement('span');
+                span.innerText = this.value;
+                span.style.font = this.fontSize + 'px "Microsoft YaHei"';
+                document.body.appendChild(span);
+                this.width = span.clientWidth;
+                document.body.removeChild(span);
+
+                this.x = this.ctx.canvas.width;
+                this.y = this.ctx.canvas.height * Math.random();
+                //上边界
+                if(this.y < this.fontSize){
+                    this.y = this.fontSize;
+                }
+                if(this.y > this.ctx.canvas.height - this.fontSize){
+                    this.y = this.ctx.canvas.height - this.fontSize;
+                }
+            }
+            render (){
+                this.ctx.context.font = this.fontSize + 'px "Microsoft YaHei"';
+                this.ctx.context.fillStyle = this.color;
+                this.ctx.context.fillText(this.value, this.x, this.y)
+            }
+        }
+        class CanvasBrrage {
+            constructor (canvas, video, options = {}){
+                if(!canvas || !video){
+                    return;
+                }
+                this.canvas = canvas;
+                this.video = video;
+                let defaultOptions = {
+                    data: [],
+                    speed: 2,
+                    fontSize: 24,
+                    color: '#eee',
+                }
+                Object.assign(this, defaultOptions, options);
+                this.context = canvas.getContext('2d');
+                this.canvas.width = video.clientWidth;
+                this.canvas.height = video.clientHeight;
+                this.brrages = this.data.map(brrage=>new Brrage(brrage,this));
+                this.isStart = false;
+                //this.render();
+            }
+            renderBrrage (){
+                let time = this.video.currentTime;
+                this.brrages.forEach((brrage)=>{
+                    if(!brrage.flag && time >= brrage.time){
+                        if(!brrage.isInit){
+                            brrage.init(); 
+                            brrage.isInit = true;
+                        }
+                        brrage.x -= brrage.speed;
+                        brrage.render();
+                        if(brrage.x<brrage.width*-1){
+                            brrage.flag = false;
+                        }                    
+                    }
+                });
+            }
+            render (){
+                this.context.clearRect(0,0,this.canvas.width,this.canvas.height);
+                this.renderBrrage();
+                if(this.isStart === true){
+                    requestAnimationFrame(this.render.bind(this));
+                }
+            }
+            add (obj){
+                if(obj.value && obj.time >= 0){
+                    this.brrages.push(new Brrage(obj,this));
+                }
+            }
+        }
+        let canvasBrrage = new CanvasBrrage(canvas,video,{data});
+        video.addEventListener('play',function(){
+            canvasBrrage.isStart = true;
+            canvasBrrage.render();
+        });
+        video.addEventListener('pause',function(){
+            canvasBrrage.isStart = false;
+            canvasBrrage.render();
+        });
+        $('#add').addEventListener('click', function(){
+            let value = $('#text').value;
+            let time = video.currentTime;
+            let color = $('#color').value;
+            let fontSize = $('#range').value;
+            canvasBrrage.add({value, time, color, fontSize});
+        });
+    </script>
 </body>
 </html>
