@@ -8,7 +8,7 @@ export default  [
       complete: false
     }, {
       task: "异步发展过程：callback/promise/generator/co/async/await等异步流程控制",
-      complete: false
+      complete: true
     }, {
       task: "JavaScript模块化发展史: CommonJS/AMD/CMD/ES6模块",
       complete: false
