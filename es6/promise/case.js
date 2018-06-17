@@ -15,8 +15,7 @@ readFile("../callback/file/1.txt").then((data)=>{
     console.log('1.txt:'+data);
 },(err)=>{
     console.log(err);
-})
-readFile("../callback/file/2.txt").then((data)=>{
+}).then((data)=>{
     console.log('2.txt:'+data);
 },(err)=>{
     console.log(err);
