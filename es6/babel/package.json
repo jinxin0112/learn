@@ -1,7 +1,6 @@
 {
     "name": "babel",
     "version": "0.0.1",
-    "scripts": {},
     "dependencies": {},
     "devDependencies": {
         "babel-cli": "^6.26.0",

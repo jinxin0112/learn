@@ -5,7 +5,7 @@ export default  [
     },        
     {
       task: "ES6/ES7 语法和原理实现",
-      complete: false
+      complete: true
     }, {
       task: "异步发展过程：callback/promise/generator/co/async/await等异步流程控制",
       complete: true
@@ -14,7 +14,7 @@ export default  [
       complete: false
     }, {
       task: "promise设计模式原理及在es6中的应用,手写一个符合promise A+ 规范的promise实现",
-      complete: false
+      complete: true
     }, {
       task: "Nodes 核心原理， 手写Stream的源码",
       complete: false
