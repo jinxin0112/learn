@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //如何改变this指向
+            /*
+                1.ES6 的箭头函数
+                2.函数内部 _this = this 变量传递
+                3.apply/call/bind
+                4.new一个实例化对象
+            */
+
+        //case
+        /*
+        var obj = {
+            count:0,
+            func1:function(){
+                console.log(this.count);
+            },
+            func2:function(){
+                setTimeout(function(){
+                    this.count ++;
+                    this.func1();
+                },100);
+            }
+        }    
+
+        obj.func2();*/
+
+        //es6
+        /*
+        var obj = {
+            count: 0,
+            func1: function () {
+                console.log(this.count);
+            },
+            func2: function () {
+                setTimeout(() => {
+                    this.count++;
+                    this.func1();
+                }, 100);
+            }
+        }
+
+        obj.func2();*/
+
+        //在函数内部使用 _this = this
+      /*  
+        var obj = {
+            count: 0,
+            func1: function () {
+                console.log(this.count);
+            },
+            func2: function () {
+                var _this = this;
+                setTimeout(function(){
+                    _this.count++;
+                    _this.func1();
+                }, 100);
+            }
+        }
+        obj.func2();
+        */
+
+       // apply
+    //    var obj = {
+    //         count: 0,
+    //         func1: function () {
+    //             console.log(this.count);
+    //         },
+    //         func2: function () {
+    //             setTimeout( function(){
+    //                 this.count++;
+    //                 this.func1();
+    //             }.apply(obj), 100);
+    //         }
+    //     }
+    //     obj.func2();
+        
+       // call
+    //    var obj = {
+    //         count: 0,
+    //         func1: function () {
+    //             console.log(this.count);
+    //         },
+    //         func2: function () {
+    //             setTimeout( function(){
+    //                 this.count++;
+    //                 this.func1();
+    //             }.call(obj), 2000);
+    //         }
+    //     }
+    //     obj.func2();
+
+    //     // bind bind是创建一个新函数，必须要手动调用一次
+
+        var obj = {
+            count: 0,
+            func1: function () {
+                console.log(this.count);
+            },
+            func2: function () {
+                setTimeout( function(){
+                    this.count++;
+                    this.func1();
+                }.bind(obj)(), 100);
+            }
+        }
+        obj.func2();       
+    </script>
+</body>
+
+</html>

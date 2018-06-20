@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #demo {
+            width: 100%;
+            height: 9999px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+
+    </div>
+    <script>
+        //https://mp.weixin.qq.com/s/Vkshf-nEDwo2ODUJhxgzVA    
+        
+        function debounce(handle, wait) {
+            var timeout = null;
+            return function () {
+                if (timeout !== null) {
+                    clearTimeout(timeout);
+                    timeout = null;
+                }
+                timeout = setTimeout(handle.bind(handle), wait);
+            }
+        }
+        var obj = {
+            username: 'king',
+            func: function (){
+                this.username = 'gyh';
+                //console.log(this);
+                console.log(this.username);
+            }
+        }
+        window.addEventListener('scroll', debounce(obj.func, 200));
+    </script>
+</body>
+
+</html>

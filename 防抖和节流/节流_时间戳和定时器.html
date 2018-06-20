@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #demo {
+            width: 100%;
+            height: 9999px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+
+    </div>
+    <script>
+        //https://mp.weixin.qq.com/s/Vkshf-nEDwo2ODUJhxgzVA    
+
+        function throttle(handle, wait) {
+            var pre = Date.now();
+            var timeout = null;
+            return function () {
+                var now = Date.now();
+                clearTimeout(timeout);
+                timeout = null;
+                if (now - pre >= wait) {
+                    handle.call(handle,2);//保证第一次和中间次
+                    pre = Date.now();
+                } else {
+                    timeout = setTimeout(handle.bind(handle,1), wait);//保证最后一次
+                }
+            }
+        }
+        var obj = {
+            username: 'king',
+            func: function () {
+                this.username = 'gyh';
+                //console.log(this);
+                console.log(arguments[0]);
+            }
+        }
+        window.addEventListener('scroll', throttle(obj.func, 500));
+    </script>
+</body>
+
+</html>

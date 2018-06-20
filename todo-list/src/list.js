@@ -11,7 +11,7 @@ export default  [
       complete: true
     }, {
       task: "JavaScript模块化发展史: CommonJS/AMD/CMD/ES6模块",
-      complete: false
+      complete: true
     }, {
       task: "promise设计模式原理及在es6中的应用,手写一个符合promise A+ 规范的promise实现",
       complete: true
