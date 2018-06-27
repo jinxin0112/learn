@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="demo">
+
+    </ul>
+    <script>
+        var topic = ['king', '死神', '发哥', '老张'];
+        var $ul = document.getElementById('demo');
+        
+        for (var i = 0, html = '',data=[]; i < topic.length; i++) {
+            html += '<li>' + i + ':' + topic[i] + '<button onclick="data['+i+']()">点我</button></li>';
+            (data[i] = function(){alert(arguments.callee.value);}).value = topic[i];
+        }
+        $ul.innerHTML = html;
+
+    </script>
+</body>
+
+</html>
