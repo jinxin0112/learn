@@ -21,25 +21,47 @@
     <script>
         //https://mp.weixin.qq.com/s/Vkshf-nEDwo2ODUJhxgzVA    
         
-        function debounce(handle, wait) {
-            var timeout = null;
-            return function () {
-                if (timeout !== null) {
-                    clearTimeout(timeout);
-                    timeout = null;
+        function debounce(handle, wait, immediate) {
+            var timeout,res;
+
+            var debounced = function () {
+                var arg = arguments;
+                var context = this;
+
+                if (timeout) {
+                    clearTimeout(timeout);                   
                 }
-                timeout = setTimeout(handle.bind(handle), wait);
+                if(immediate){
+                    var callNow = !timeout; 
+                    timeout = setTimeout(function(){
+                        timeout = null;
+                    },wait);
+                    if(callNow) res = handle.apply(context, arg);
+                }else{
+                    timeout = setTimeout(function(){
+                        handle.apply(context,arg);
+                        timeout = null;
+                    }, wait);
+                }
+                return res;
             }
+
+            debounced.cancel = function(){
+                clearTimeout(timeout);
+                timeout = null;
+            }
+
+            return debounced;
         }
         var obj = {
             username: 'king',
-            func: function (){
+            func: function (e){
                 this.username = 'gyh';
-                //console.log(this);
-                console.log(this.username);
+                console.log(res);
+                return this.username
             }
         }
-        window.addEventListener('scroll', debounce(obj.func, 200));
+        window.addEventListener('scroll',debounce(obj.func, 1000, true));
     </script>
 </body>
 
