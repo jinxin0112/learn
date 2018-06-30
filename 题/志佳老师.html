@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        var f = function g(){
+            console.log(g);
+            return 123;
+        }
+        typeof g(); //报错 g is not defined
+        */
+
+
+        //console.log(["1","2","3"].map(parseInt)); //[1,NaN,NaN]
+
+        // console.log([typeof undefined, null instanceof Object]) //['object',false]
+
+        /*
+       Object.prototype.name = 2;
+        console.log(1.0.name); //1
+        console.log(1.name);  //报错
+        console.log(Function.name);  //'Function'
+        */
+
+        /*
+        console.log((function(x){
+            delete x;
+            return x;
+        })(1))
+        */
+
+        /*
+        var s = 'msg';
+        console.log('value is ' + (s === 'msg') ? 'someting' : 'noting');*/
+        /*
+        var c = 0;
+        for(var i=0;i<5;i++){
+            c++;
+            console.log('ok');
+        }
+        console.log(c);*/
+
+        /*
+        var arr = [1,2,3,undefined];
+        arr[10] = 10;
+        console.log(arr.filter(function(x){
+            return x === undefined
+        })); //[undefined]
+        */
+       /*
+        var one = 0.1;
+        var two = 0.2;
+
+        var a = 0.8;
+        var b = 0.6;
+        console.log([two - one === one, a - b === one]);*/
+
+        var a = [];
+        a.name = 'king';
+        a.age = 24
+        console.log(a instanceof Object);
+    </script>
+</body>
+
+</html>
