@@ -1,0 +1,15 @@
+{
+  "name": "kingmath",
+  "version": "1.0.0",
+  "description": "别下，用来测试",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "test",
+    "kkking"
+  ],
+  "author": "kkking",
+  "license": "ISC"
+}
