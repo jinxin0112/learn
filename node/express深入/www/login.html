@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+
+        function ajax(options) {
+            var xhr = null;
+            var params = formsParams(options.data);
+            //创建对象
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest()
+            } else {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            // 连接
+            if (options.type == "GET") {
+                xhr.open(options.type, options.url + "?" + params);
+                xhr.send(null)
+            } else if (options.type == "POST") {
+                xhr.open(options.type, options.url, options.async);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send(params);
+            }
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {                   
+                    options.success(xhr.responseText);
+                }else if(xhr.readyState == 4 && xhr.status != 200){
+                    options.error();
+                }
+            }
+            function formsParams(data) {
+                var arr = [];
+                for (var prop in data) {
+                    arr.push(prop + "=" + data[prop]);
+                }
+                return arr.join("&");
+            }
+
+        }
+    </script>    
+</head>
+<body>
+    用户：
+    <input type="text" id="user"><br>
+    密码：
+    <input type="password" id="pwd"><br>
+    <input type="button" id="login_btn" value="登录">
+
+    <script>
+        let user = document.getElementById('user');
+        let pwd = document.getElementById('pwd');
+        let login_btn = document.getElementById('login_btn');
+
+        login_btn.onclick = function(){
+            ajax({
+                url:'/login',
+                type:'POST',
+                data:{user:user.value,pwd:pwd.value},
+                success:function(res){
+                    let json = eval('('+res+')');
+                    if(json.ok){
+                        alert('登录成功');
+                    }else{
+                        alert('登录失败: '+json.msg);
+                    }
+                },
+                error:function(){
+                    alert('网络不通');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
