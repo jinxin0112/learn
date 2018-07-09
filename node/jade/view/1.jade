@@ -1,0 +1,21 @@
+html
+    head
+        script(src="")
+        link(rel="stylesheet", href="")
+    body
+        div
+            ul
+                li. 
+                    input(type="text" value="abc")
+                li #{a+b}
+                li 222
+        div(style=json)
+        div(class=arr)
+        div(class=arr class="item")
+        -var c=1
+        -var d=2
+        span #{c+d}
+        span=c+d
+
+        -for(var i=0;i<arr.length;i++)
+            div=arr[i]
