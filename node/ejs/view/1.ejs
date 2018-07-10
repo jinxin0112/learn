@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h3><%='11d65qwdw'%></h3>
+    <div><%=12+5%></div>
+    <ul>
+        <% for(var i=0;i<json.arr.length;i++){ %>
+            <li><%=json.arr[i].user%></li>
+        <% } %>
+    </ul>
+    <% if(json.arr.length==3){ %>
+    <% include ../css/1.css %>
+    <% }else{ %>
+    <% include ../css/2.css %>
+    <% } %> 
+</body>
+</html>
